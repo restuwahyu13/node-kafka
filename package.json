@@ -1,0 +1,29 @@
+{
+	"name": "kafka-example",
+	"version": "1.0.0",
+	"description": "example basic kafkajs",
+	"main": "index.js",
+	"scripts": {
+		"producer": "node producer.js",
+		"consumer": "node consumer.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "restuwahyu13"
+	},
+	"keywords": [
+		"kafka",
+		"message",
+		"brokers"
+	],
+	"author": "restuwahyu13",
+	"license": "MIT",
+	"dependencies": {
+		"kafkajs": "^1.15.0"
+	},
+	"devDependencies": {
+		"chalk": "^4.1.1",
+		"consola": "^2.15.3",
+		"dotenv": "^9.0.1"
+	}
+}

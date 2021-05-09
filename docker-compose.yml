@@ -1,0 +1,111 @@
+version: '3.8'
+services:
+  ### ===================
+  ### APP SERVICE
+  ### ===================
+  app:
+    container_name: app
+    restart: always
+    build: .
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      start_period: 60ms
+      test: |
+        touch /tmp/healthcheck.txt &&
+        mkdir /tmp/healthcheck &&
+        mv /tmp/healthcheck.txt /tmp/healthcheck &&
+        cd /tmp/healthcheck &&
+        echo "hello my docker container is working fine" >> healthcheck.txt &&
+        cat healthcheck.txt &&
+        sleep 3 &&
+        rm "${PWD}/healthcheck.txt" &&
+        cd .. &&
+        sleep 3 &&
+        rmdir "${PWD}/healthcheck" &&
+        clear
+      timeout: 30ms
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/node_modules
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+      - kafka
+  ### ===================
+  ### ZOOKEEPER SERVICE
+  ### ===================
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    restart: always
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      start_period: 60ms
+      test: |
+        touch /tmp/healthcheck.txt &&
+        mkdir /tmp/healthcheck &&
+        mv /tmp/healthcheck.txt /tmp/healthcheck &&
+        cd /tmp/healthcheck &&
+        echo "hello my docker container is working fine" >> healthcheck.txt &&
+        cat healthcheck.txt &&
+        sleep 3 &&
+        rm "${PWD}/healthcheck.txt" &&
+        cd .. &&
+        sleep 3 &&
+        rmdir "${PWD}/healthcheck" &&
+        clear
+      timeout: 30ms
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIMES: 2000
+    ports:
+      - 2181:2181
+    networks:
+      - node-networks
+  ### ====================
+  ### KAFKA SERVICE
+  ### ====================
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    restart: always
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      start_period: 60ms
+      test: |
+        touch /tmp/healthcheck.txt &&
+        mkdir /tmp/healthcheck &&
+        mv /tmp/healthcheck.txt /tmp/healthcheck &&
+        cd /tmp/healthcheck &&
+        echo "hello my docker container is working fine" >> healthcheck.txt &&
+        cat healthcheck.txt &&
+        sleep 3 &&
+        rm "${PWD}/healthcheck.txt" &&
+        cd .. &&
+        sleep 3 &&
+        rmdir "${PWD}/healthcheck" &&
+        clear
+      timeout: 30ms
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE_HOST
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE_HOST:PLAINTEXT, OUTSIDE_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INSIDE_HOST://kafka:9092, OUTSIDE_HOST://localhost:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - 9092:9092
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+  ### ===================================
+  ### NETWORKS GROUP FOR ONE SAME SERVICE
+  ### ===================================
+networks:
+  node-networks:
