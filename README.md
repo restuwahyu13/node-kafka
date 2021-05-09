@@ -1,14 +1,4 @@
-## Basic Kafka
+## Node Kafka With Docker
 
-Example setup implementatation kafka using docker and nodejs
-
-### Command
-
-- Producer
-  ```sh
-  $ npm run producer
-  ```
-- Consumer
-  ```sh
-  $ npm run consumer
-  ```
+simple setup **nodejs** + **kafka** on **docker** using `docker.compose.yml`, running producer `npm run producer` and running
+consumer `npm run consumer`.
