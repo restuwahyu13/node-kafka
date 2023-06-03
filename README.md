@@ -1,8 +1,30 @@
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Apache_kafka_wordtype.svg/2560px-Apache_kafka_wordtype.svg.png)
 
-## Pengenalan Kafka
+## What is Kafka
 
-**Apache Kafka** adalah open source platform distribusi streaming data yang dirancang untuk menyimpan, mengalirkan, dan memproses data secara real-time, yang dimana kafka dikembangkan oleh insiyur perangkat lunak dari **Linkend** tepatnya pada tahun 2010 yang di buat dengan bahasa pemerograman **Java**, yang dimana kala itu kafka digunakan untuk menampilkan realtime analitik untuk menampilkan jumlah data pengunjung profile di linkend. selain tersedia untuk versi open source kafka juga tersedia untuk enterprise version yang dimana didukung langsung oleh author dari si kafka itu sendiri, untuk info lebih lanjut bisa silahkan kunjungi [Confluent](https://www.confluent.io) dan untuk TypeScript code resource silahkan [Cek Disini](https://github.com/restuwahyu13/node-shared-modules/blob/master/packages/kafka/src/index.ts).
+**Apache Kafka** adalah open source platform distribusi streaming data yang dirancang untuk menyimpan, mengalirkan, dan memproses data secara real-time, yang dimana kafka dikembangkan oleh insiyur perangkat lunak dari **Linkend** tepatnya pada tahun 2010 yang di buat dengan bahasa pemerograman **Java**, yang dimana kala itu kafka digunakan untuk mengumpulkan dan menganalisa data secara realtime di linkend. selain tersedia untuk versi open source kafka juga tersedia untuk enterprise version yang dimana didukung langsung oleh author dari si kafka itu sendiri, untuk info lebih lanjut bisa silahkan kunjungi [Confluent](https://www.confluent.io) dan untuk TypeScript code resource silahkan [Cek Disini](https://github.com/restuwahyu13/node-shared-modules/blob/master/packages/kafka/src/index.ts).
+
+## KafKa Terminologi
+
+- **Topic:** adalah wadah untuk tempat menampung setiap partition berdasarkan nama topic yang telah dibuat sebelumnya, jika di ibaratkan ke database partition adalah database itu sendiri.
+
+- **Partition:** adalah wadah untuk tempat menampung dari setiap data yang dikirim melalui topic dan setiap partisi dikelola secara terpisah, jika di ibaratkan ke database partition adalah table pada database.
+
+- **Broker:** adalah aplikasi yang bertanggung jawab untuk menerima dan menyimpan data dari producer dan memastikan data tersebut dikirim kepada consumer.
+
+- **Producer:** adalah aplikasi yang bertugas untuk mengirim data ke topic tertentu yang kemudian data kan dimasukan kedalam partition.
+
+- **Consumer:** adalah aplikasi yang bertugas untuk membaca data yang dikirim dari producer melalui topic yang di simpan ke dalam partition.
+
+- **Offset:** adalah urutan unique dari sebuah data (message) yang di simpan di dalam sebuah partisi, yang dimana urutannya dimulai dari index ke 0 dan juga untuk memastikan bahwa data yang disimpan tidak akan tertukar dengan data lainnya, jika di analogikan ke dalam database offset adalah rows pada table.
+
+- **ZooKeeper:** adalah layanan koordinasi untuk manajemen cluster Kafka. zooKeeper bertanggung jawab untuk menyimpan metadata tentang broker, partisi, dan consumer di cluster Kafka.
+
+- **Cluster:** adalah kemampuan untuk memperluas 1 brokers menjadi banyak brokers.
+
+- **Node:** adalah 1 dari banyak instance brokers yang masing - masing memiliki partition, offset, replication didalamnya, yang dimana 1 instance nodes akan bertindak sebagai seorang leader (master), untuk mengontrol menulis dan membaca data dan yang lainnya akan bertidak sebagai seorang folower (queue mirror), jadi jika leadernya mati maka akan di gantikan oleh folowernya, begitu juga seterusnya.
+
+- **Replication:** adalah kemampuan untuk mengkloning (duplikasi) sebuah partition, yang dimana berfungsi ketika partition tersebut hilang, maka bisa mengambil data (message) tersebut dari salinan partition yang sudah di cloning (duplikasi).
 
 ## Kafka Pattern
 
@@ -26,7 +48,7 @@
 
   - **Subscribe Pattern:** berfungsi untuk berlangganan pesan dari topik tertentu.
 
-  - **Polling Pattern:** berfungsi untuk mendapatkan data baru dari topik tertentu.
+  - **Polling Pattern:** berfungsi untuk mendapatkan data baru dari topik tertentu, yang dimana consumer akan memerikan setiap partition secara terus menerus untuk mendapatkan data yang paling terbaru.
 
   - **Load Balancing Pattern:** berfungsi untuk menyeimbangkan pemerosesan data dari topik, cara ini biasanya akan terlihat ketika anda menggunakan consumer group, yang dimana dari masing - masing consumer yang berada didalam group yang sama akan di seimbangkan bebannya,
   maksudnya disini adalah 1 partition akan di assign ke 1 konsumer, berikut adalah beberapa algoritma load balancing yang dimiliki oleh kafka konsumer seperti RoundRobinAssignor, RangeAssignor, StickyAssignor, CooperativeStickyAssignor dan ConsumerPartitionAssignor.
@@ -61,3 +83,5 @@
 
   - **Commit:** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung dihapus sampai rentang waktu yang telah di tentukan.
   - **Uncommit:** yang dimana proses nya untuk memberitahu konsumer bahwa data tidak berhasil di baca dan data akan dimasukan ulang kedalam antrian pesan.
+
+### Consumer Group Behaviour
