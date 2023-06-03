@@ -1,14 +1,35 @@
-const { kafkaProducer } = require('./kafka')
+require('dotenv/config')
+const { KafkaClient, CompressionTypes } = require('./kafka.js')
+const { faker } = require('@faker-js/faker')
 
-;(async function () {
-	try {
-		const userData = {
-			name: 'restu wahyu saputra',
-			age: 25,
-			hobby: 'coding'
-		}
-		await kafkaProducer('user-service', userData)
-	} catch (error) {
-		consola.info(chalk.red(error))
-	}
-})()
+let kafka = new KafkaClient({
+	brokers: [process.env.KAFKA_BROKERS_1, process.env.KAFKA_BROKERS_2],
+	clientId: faker.string.uuid(),
+	ssl: false
+})
+
+setInterval(async () => {
+	;(async () => {
+		await kafka.publisher({
+			type: 'single',
+			sendConfig: {
+				topic: 'user-service',
+				messages: [
+					{
+						value: JSON.stringify({
+							userId: faker.string.uuid(),
+							username: faker.internet.userName(),
+							email: faker.internet.email(),
+							avatar: faker.image.avatar(),
+							password: faker.internet.password(),
+							birthdate: faker.date.birthdate(),
+							registeredAt: faker.date.past()
+						})
+					}
+				]
+			}
+		})
+
+		console.log('Publish successfully: ', new Date().toISOString())
+	})()
+}, 3000)

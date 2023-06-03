@@ -1,11 +1,20 @@
-const { kafkaConsumer } = require('./kafka')
+require('dotenv/config')
+const { KafkaClient } = require('./kafka.js')
+const { faker } = require('@faker-js/faker')
 
-;(async function () {
-	try {
-		const response = await kafkaConsumer('user-service-group', 'user-service')
-		const result = JSON.parse(response.message.value.toString())
-		consola.success(`my name is ${result.name}`)
-	} catch (error) {
-		consola.info(chalk.red(error))
-	}
+let kafka = new KafkaClient({
+	brokers: [process.env.KAFKA_BROKERS_1, process.env.KAFKA_BROKERS_2],
+	clientId: faker.string.uuid(),
+	ssl: false
+})
+
+;(async () => {
+	await kafka.subscriber(
+		{
+			subscribeConfig: { topic: 'user-service', fromBeginning: true },
+			consumerConfig: { groupId: 'user-service-group', rebalanceTimeout: 30000 },
+			runConfig: { autoCommit: true }
+		},
+		(payload) => console.log(JSON.parse(payload.message.value.toString()))
+	)
 })()
