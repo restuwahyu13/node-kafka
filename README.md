@@ -44,3 +44,20 @@
   - **Message Queueing Pattern:** berfungsi sebagai pola sistem antrian pesan, yang dimana setiap data yang dikirim akan masuk kedalam antrian untuk dilakukan pemrosesan lebih lanjut.
 
   - **Broadcast Pattern:** berfungsi untuk mengirim banyak pesan sekaligus ke semua konsumer yang berlangganan ke topik tertentu.
+
+## Diference Queue & Topic Concept
+
+- **Queue Pattern:** yang dimana proses nya itu setelah data tersebut di konsume oleh konsumer, maka data tersebut akan langsung di hapus oleh queue, tetapi bisa juga data tidak langsung di hapus dengan melakukan Unacknowledge.
+- **Topic Pattern:** yang dimana proses nya itu setelah data tersebut di konsume oleh konsumer, maka data tersebut tidak akan langsung di hapus, dikarenakan data akan baru dihapus sesuai dengan rentang waktu yang telah di tentukan oleh topic.
+
+## Diference Action Consumer Process
+
+- #### RabbitMQ
+
+  - **Acknowledge** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca dan data akan langsung di hapus.
+  - **Unacknowledge** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung di hapus dikarenakan data akan dimasukan ulang kedalam antrian pesan.
+
+- #### Kafka
+
+  - **Commit** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung dihapus sampai rentang waktu yang telah di tentukan.
+  - **Uncommit** yang dimana proses nya untuk memberitahu konsumer bahwa data tidak berhasil di baca dan data akan dimasukan ulang kedalam antrian pesan.
