@@ -1,6 +1,6 @@
-require('dotenv/config')
-const { KafkaClient, CompressionTypes } = require('./kafka.js')
+const { KafkaClient } = require('./kafka.js')
 const { faker } = require('@faker-js/faker')
+const consola = require('consola')
 
 let kafka = new KafkaClient({
 	brokers: [process.env.KAFKA_BROKERS_1, process.env.KAFKA_BROKERS_2],
@@ -30,6 +30,6 @@ setInterval(async () => {
 			}
 		})
 
-		console.log('Publish successfully: ', new Date().toISOString())
+		consola.info('Publish successfully: ', new Date().toISOString())
 	})()
 }, 3000)

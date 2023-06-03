@@ -23,3 +23,16 @@ cup:
 
 cdown:
 	docker-compose -f docker-compose.cluster.yml down
+
+###############################
+# KAFKA APPLIATION
+###############################
+
+pub:
+	npm run pub
+
+sub:
+	npm run sub
+
+csub:
+	npm run csub

@@ -1,6 +1,6 @@
-require('dotenv/config')
 const { KafkaClient } = require('./kafka.js')
 const { faker } = require('@faker-js/faker')
+const consola = require('consola')
 
 ;(async () => {
 	const consumerGroups = []
@@ -17,7 +17,7 @@ const { faker } = require('@faker-js/faker')
 					consumerConfig: { groupId: 'user-service-group-new', rebalanceTimeout: 30000 },
 					runConfig: { autoCommit: true }
 				},
-				(payload) => console.log(JSON.parse(payload.message.value.toString()))
+				(payload) => consola.info(JSON.parse(payload.message.value.toString()))
 			)
 		)
 	}
