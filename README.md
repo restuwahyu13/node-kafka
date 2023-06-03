@@ -1,4 +1,4 @@
-# Node Kafka
+![](https://www.azul.com/wp-content/uploads/2017/03/kafka.jpg)
 
 ## Pengenalan Kafka
 
