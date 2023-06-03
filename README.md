@@ -54,10 +54,10 @@
 
 - #### RabbitMQ
 
-  - **Acknowledge** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca dan data akan langsung di hapus.
-  - **Unacknowledge** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung di hapus dikarenakan data akan dimasukan ulang kedalam antrian pesan.
+  - **Acknowledge:** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca dan data akan langsung di hapus.
+  - **Unacknowledge:** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung di hapus dikarenakan data akan dimasukan ulang kedalam antrian pesan.
 
 - #### Kafka
 
-  - **Commit** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung dihapus sampai rentang waktu yang telah di tentukan.
-  - **Uncommit** yang dimana proses nya untuk memberitahu konsumer bahwa data tidak berhasil di baca dan data akan dimasukan ulang kedalam antrian pesan.
+  - **Commit:** yang dimana proses nya untuk memberitahu konsumer bahwa data telah berhasil di baca, tetapi data tidak akan langsung dihapus sampai rentang waktu yang telah di tentukan.
+  - **Uncommit:** yang dimana proses nya untuk memberitahu konsumer bahwa data tidak berhasil di baca dan data akan dimasukan ulang kedalam antrian pesan.
