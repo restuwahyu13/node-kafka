@@ -1,4 +1,4 @@
-![](https://www.azul.com/wp-content/uploads/2017/03/kafka.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Apache_kafka_wordtype.svg/2560px-Apache_kafka_wordtype.svg.png)
 
 ## Pengenalan Kafka
 
