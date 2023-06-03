@@ -20,9 +20,9 @@ services:
     networks:
       - node-networks
   ### ====================
-  ### KAFKA SERVICE
+  ### KAFKA 1 SERVICE
   ### ====================
-  kafka:
+  kafka1:
     image: confluentinc/cp-kafka:latest
     restart: always
     healthcheck:
@@ -45,11 +45,46 @@ services:
       KAFKA_COMPRESSION_TYPE: 'gzip'
       KAFKA_INTER_BROKER_LISTENER_NAME: CONTAINER_HOST
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTAINER_HOST:PLAINTEXT, CLIENT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: CONTAINER_HOST://kafka:29092, CLIENT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: CONTAINER_HOST://kafka1:29092, CLIENT_HOST://localhost:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     ports:
       - 29092:29092
       - 9092:9092
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+  ### ====================
+  ### KAFKA 2 SERVICE
+  ### ====================
+  kafka2:
+    image: confluentinc/cp-kafka:latest
+    restart: always
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      start_period: 60ms
+      test: env | grep HOME
+      timeout: 30ms
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_RECEIVE_BUFFER_BYTES: 524288
+      KAFKA_MESSAGE_MAX_BYTES: 3145728
+      KAFKA_MAX_REQUEST_SIZE: 3145728
+      KAFKA_AUTO_COMMIT_INTERVAL_MS: 3000
+      KAFKA_REQUEST_TIMEOUT_MS: 15000
+      KAFKA_MAX_BLOCK_MS: 30000
+      KAFKA_SESSION_TIMEOUT_MS: 60000
+      KAFKA_COMPRESSION_TYPE: 'gzip'
+      KAFKA_INTER_BROKER_LISTENER_NAME: CONTAINER_HOST
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTAINER_HOST:PLAINTEXT, CLIENT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: CONTAINER_HOST://kafka2:29093, CLIENT_HOST://localhost:9093
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - 29093:29093
+      - 9093:9093
     networks:
       - node-networks
     depends_on:
@@ -68,8 +103,10 @@ services:
       timeout: 30ms
     environment:
       DYNAMIC_CONFIG_ENABLED: true
-      KAFKA_CLUSTERS_0_NAME: kafka
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_NAME: kafka1
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:29092
+      KAFKA_CLUSTERS_1_NAME: kafka2
+      KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: kafka2:29093
     ports:
       - 8080:8080
     networks:
