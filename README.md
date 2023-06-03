@@ -28,7 +28,8 @@
 
   - **Polling Pattern:** berfungsi untuk mendapatkan data baru dari topik tertentu.
 
-  - **Load Balancing Pattern:** berfungsi untuk menyeimbangkan pemerosesan data dari topik, cara ini biasanya akan terlihat ketika anda menggunakan `Consumer Group`, yang dimana dari masing - masing consumer yang berada didalam group yang sama akan di seimbangkan bebannya, maksudnya disini adalah 1 partition akan di assign ke 1 konsumer, berikut adalah beberapa algoritma load balancing yang dimiliki oleh kafka konsumer seperti `RoundRobinAssignor,RangeAssignor,StickyAssignor,CooperativeStickyAssignor dan ConsumerPartitionAssignor`.
+  - **Load Balancing Pattern:** berfungsi untuk menyeimbangkan pemerosesan data dari topik, cara ini biasanya akan terlihat ketika anda menggunakan `Consumer Group`, yang dimana dari masing - masing consumer yang berada didalam group yang sama akan di seimbangkan bebannya,
+  maksudnya disini adalah 1 partition akan di assign ke 1 konsumer, berikut adalah beberapa algoritma load balancing yang dimiliki oleh kafka konsumer seperti `RoundRobinAssignor, RangeAssignor, StickyAssignor, CooperativeStickyAssignor dan ConsumerPartitionAssignor`.
 
   - **Once Processing Pattern:** Konsumer memastikan data yang diproses hanya 1x digunakan.
 
