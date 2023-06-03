@@ -2,7 +2,7 @@
 
 ## Pengenalan Kafka
 
-**Apache Kafka** adalah open source platform distribusi streaming data yang dirancang untuk menyimpan, mengalirkan, dan memproses data secara real-time, yang dimana kafka dikembangkan oleh insiyur perangkat lunak dari **Linkend** tepatnya pada tahun 2010 yang di buat dengan bahasa pemerograman **Java**, yang dimana kala itu kafka digunakan untuk menampilkan realtime analitik untuk menampilkan jumlah data pengunjung profile di linkend. selain tersedia untuk versi open source kafka juga tersedia untuk enterprise version yang dimana didukung langsung oleh author dari si kafka itu sendiri, untuk info lebih lanjut bisa silahkan kunjungi [Confluent](https://www.confluent.io) dan untuk TypeScript resource [cek disini](https://github.com/restuwahyu13/node-shared-modules/blob/master/packages/kafka/src/index.ts).
+**Apache Kafka** adalah open source platform distribusi streaming data yang dirancang untuk menyimpan, mengalirkan, dan memproses data secara real-time, yang dimana kafka dikembangkan oleh insiyur perangkat lunak dari **Linkend** tepatnya pada tahun 2010 yang di buat dengan bahasa pemerograman **Java**, yang dimana kala itu kafka digunakan untuk menampilkan realtime analitik untuk menampilkan jumlah data pengunjung profile di linkend. selain tersedia untuk versi open source kafka juga tersedia untuk enterprise version yang dimana didukung langsung oleh author dari si kafka itu sendiri, untuk info lebih lanjut bisa silahkan kunjungi [Confluent](https://www.confluent.io) dan untuk TypeScript code resource silahkan [Cek Disini](https://github.com/restuwahyu13/node-shared-modules/blob/master/packages/kafka/src/index.ts).
 
 ## Kafka Pattern
 
