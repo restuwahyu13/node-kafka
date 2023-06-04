@@ -90,7 +90,7 @@ services:
     depends_on:
       - zookeeper
   ### ====================
-  ### KAFKA SERVICE
+  ### KAFKA DASHBOARD
   ### ====================
   dashboard:
     image: provectuslabs/kafka-ui:latest
