@@ -12,7 +12,7 @@ let kafka = new KafkaClient({
 	await kafka.subscriber(
 		{
 			subscribeConfig: { topic: 'user-service', fromBeginning: true },
-			consumerConfig: { groupId: 'user-service-group', rebalanceTimeout: 30000 },
+			consumerConfig: { groupId: 'user-service-group' },
 			runConfig: { autoCommit: true }
 		},
 		(payload) => consola.info(JSON.parse(payload.message.value.toString()))
